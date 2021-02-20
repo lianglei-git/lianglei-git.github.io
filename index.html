@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测试</title>
+    <title>园区报表移动端交接文档</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
 </head>
+
 <body>
-    测试github
+    <div id="app">
+        <!-- <% for(var i = 0; i < images.length; i++) {%> -->
+        <!-- <% }%> -->
+        <div class="titles">
+               <el-row class="tac">
+            <el-col :span="12">
+                <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+                    <el-menu-item v-for="(item,index) in titles" :key="index" :index="'1-' + index">{{item.label}}</el-menu-item>
+                </el-menu>
+            </el-col>
+        </el-row>     
+        </div>
+        <main>
+            助手
+        </main>
+    </div>
 </body>
+<script>
+    function compile(template) {
+        let reg1 = /<%=(.+?)%>/g
+        let reg2 = /<%([\s\S]+?)%>/g
+        template
+            .replace(reg1, '`); \n echo($1); echo(`')
+            .replace(reg2, '`) \n $1 \n echo(`')
+        template = 'echo(`' + template + '`)'
+        // echo('<ul>');
+        // for(let i=0; i < data.supplies.length; i++) {
+        //   echo('<li>');
+        //   echo(data.supplies[i]);
+        //   echo('</li>');
+        // };
+        // echo('</ul>');
+        return `data => {
+            let output = ''
+            function echo(html) {
+                output += html
+            }
+            ${template}
+            return output
+        }`
+    }
+</script>
+<!-- <script type="text/babel" src="./a.jsx"></script> -->
+<script src="./components.js"></script>
+
 </html>

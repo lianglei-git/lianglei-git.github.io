@@ -1,0 +1,25 @@
+body,
+html,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  padding: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+#app main {
+  flex: 1;
+  width: 1px;
+}
+.titles {
+  width: 300px;
+  height: 100%;
+}
+.titles > .tac {
+  width: 100%;
+}
