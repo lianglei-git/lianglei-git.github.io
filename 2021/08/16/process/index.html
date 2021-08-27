@@ -210,7 +210,7 @@
 <li><code>process.argv</code> <blockquote>
 <p>process.argv -&gt; 以<font color="red"><strong>数组</strong><font color="#ccc">的方式显示命令行内容</font></font></p><font color="red"><font color="#ccc">
 </font></font></blockquote><font color="red"><font color="#ccc">
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例如命令行输入 "node script.js -watch -a -b"</span></span><br><span class="line"><span class="built_in">console</span>.log(process.argv) </span><br><span class="line"><span class="comment">// -&gt; ['node.exe', 'script.js根路径', '-watch', '-a', '-b'] </span></span><br></pre></td></tr></tbody></table></figure></font></font></li><font color="red"><font color="#ccc">
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 例如命令行输入 "node script.js -watch -a -b"</span><br><span class="hljs-built_in">console</span>.log(process.argv) <br><span class="hljs-comment">// -&gt; ['node.exe', 'script.js根路径', '-watch', '-a', '-b'] </span><br></code></pre></td></tr></tbody></table></figure></font></font></li><font color="red"><font color="#ccc">
 <li><code>process.exit()</code> <blockquote>
 <p>process.exit() -&gt; <font color="green"><strong>强制</strong><font color="#ccc">退出程序</font></font></p><font color="green"><font color="#ccc">
 </font></font></blockquote><font color="green"><font color="#ccc">
@@ -219,11 +219,11 @@
 <li><code>process.env.npm_package_</code><font color="#ccc"><blockquote>
 <p>process.env.npm_package_ -&gt; 可以取的package.json里面定义好的key:value;首先，通过npm_package_前缀，npm 脚本可以拿到package.json里面的字段。比如，下面是一个package.json。</p>
 </blockquote>
-<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"foo"</span>, </span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.2.5"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: {</span><br><span class="line">    <span class="attr">"view"</span>: <span class="string">"node view.js"</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><code class="hljs json">{<br>  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"foo"</span>, <br>  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.2.5"</span>,<br>  <span class="hljs-attr">"scripts"</span>: {<br>    <span class="hljs-attr">"view"</span>: <span class="hljs-string">"node view.js"</span><br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <code>npm run view</code> <br></font></li><font color="#ccc">
 </font></font></font></font></font></font></ul><font color="red"><font color="#ccc"><font color="green"><font color="#ccc"><font color="red"><font color="#ccc">
 <p>那么，变量npm_package_name返回foo，变量npm_package_version返回1.2.5。</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// view.js 需要了解： 需要通过package.json里面命令启动才可以拿到 下列字段</span></span><br><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_name); <span class="comment">// foo</span></span><br><span class="line"><span class="built_in">console</span>.log(process.env.npm_package_version); <span class="comment">// 1.2.5</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// view.js 需要了解： 需要通过package.json里面命令启动才可以拿到 下列字段</span><br><span class="hljs-built_in">console</span>.log(process.env.npm_package_name); <span class="hljs-comment">// foo</span><br><span class="hljs-built_in">console</span>.log(process.env.npm_package_version); <span class="hljs-comment">// 1.2.5</span><br></code></pre></td></tr></tbody></table></figure>
 <ul>
 <li>ts-node <blockquote>
 <p>ts-node -&gt; 直接启动ts项目<br><code>用法： node -r ts-node/register script/build --env=development --watch</code>  script/build.ts!!!</p>
@@ -268,12 +268,10 @@
   <div class="post-guide">
     <div class="item left">
         
-          <a href="/2021/08/16/%20%E8%AE%A4%E7%9F%A5%E5%B1%8A%E7%9A%84%E5%85%B3%E7%B3%BB%E6%88%B7%EF%BC%9FDIP%E3%80%81IoC%E3%80%81DI%E3%80%81JS/">认知届的关系户？DIP、IoC、DI、JS</a>
+          <a href="/2021/08/16/nvm/">nvm版本控制</a>
         
     </div>
     <div class="item right">
-        
-          <a href="/2021/08/16/nvm/">nvm版本控制</a>
         
     </div>
   </div>
@@ -313,7 +311,7 @@
   
 </html>
 <script type="text/javascript">
-                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"\",\"API_KEY\":\"\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"xxxxx\"}}")
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2019/7/26\",\"site_id\":\"\",\"access_token\":\"xxxxx\"}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
     
     window.loadJs = function(d, m, a) {
