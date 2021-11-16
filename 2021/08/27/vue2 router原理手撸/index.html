@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>vue2-router 手动实现 | Sparrow</title>
+  <meta name="description" content="vue2的router 手写 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970let Vue &#x3D; null;class VueRouter &amp;#123;    constructor(o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue2-router 手动实现">
+<meta property="og:url" content="http://example.com/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/index.html">
+<meta property="og:site_name" content="Sparrow">
+<meta property="og:description" content="vue2的router 手写 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970let Vue &#x3D; null;class VueRouter &amp;#123;    constructor(o">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-16T14:21:46.795Z">
+<meta property="article:author" content="麻雀">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Sparrow" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="../images/logo.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/lianglei-git" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">麻雀</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">法律、程序员、骑行玩家</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国-北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/lianglei-git" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>一个自卑的人，很现实。不清醒</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JS/" style="font-size: 14px;">JS</a> <a href="/tags/Node/" style="font-size: 13.5px;">Node</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Vue/" style="font-size: 13.5px;">Vue</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 13px;">调试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/" class="title">你可能还不知道的复制(Copy)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-26T16:00:00.000Z" itemprop="datePublished">2021-09-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/07/%E6%89%80%E8%B0%93%E6%A1%86%E6%9E%B6%E7%9A%84%E8%B0%83%E8%AF%95/" class="title">所谓框架的调试</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-06T16:00:00.000Z" itemprop="datePublished">2021-09-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/06/vue2%20vuex%E5%8E%9F%E7%90%86/" class="title">vue2-vuex 手动实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-05T16:00:00.000Z" itemprop="datePublished">2021-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/" class="title">vue2-router 手动实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-26T16:00:00.000Z" itemprop="datePublished">2021-08-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/16/%20%E8%AE%A4%E7%9F%A5%E5%B1%8A%E7%9A%84%E5%85%B3%E7%B3%BB%E6%88%B7%EF%BC%9FDIP%E3%80%81IoC%E3%80%81DI%E3%80%81JS/" class="title">认知届的关系户？DIP、IoC、DI、JS</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-16T02:51:06.000Z" itemprop="datePublished">2021-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-vue2 router原理手撸" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue2-router 手动实现
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/" class="article-date">
+	  <time datetime="2021-08-26T16:00:00.000Z" itemprop="datePublished">2021-08-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/JS/" rel="tag">JS</a>, <a class="article-tag-link-link" href="/tags/Vue/" rel="tag">Vue</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>vue2的router 手写</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> Vue = <span class="hljs-literal">null</span>;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VueRouter</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options</span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.options = options<br>        <span class="hljs-built_in">this</span>.current = <span class="hljs-built_in">window</span>.location.hash.slice(<span class="hljs-number">1</span>) || <span class="hljs-string">&#x27;/&#x27;</span><br>        Vue.util.defineReactive(<span class="hljs-built_in">this</span>, <span class="hljs-string">&#x27;current&#x27;</span>, <span class="hljs-built_in">this</span>.current) <span class="hljs-comment">// *</span><br>        <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;hashchange&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-built_in">this</span>.current = <span class="hljs-built_in">window</span>.location.hash.slice(<span class="hljs-number">1</span>)<br><br>        &#125;)<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flatCurrty</span>(<span class="hljs-params">routes</span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> n = []<br>    <span class="hljs-keyword">const</span> flat = <span class="hljs-function">(<span class="hljs-params">path,children</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span>(children.length &gt; <span class="hljs-number">0</span>) &#123;<br>            children.map(<span class="hljs-function"><span class="hljs-params">router</span> =&gt;</span> &#123;<br>                n.push(&#123;<br>                    <span class="hljs-attr">path</span>: path + router.path,<br>                    <span class="hljs-attr">component</span>: router.component<br>                &#125;)<br>                <span class="hljs-keyword">if</span>(router.children) flat(path + router.path, router.children)<br>            &#125;)<br>        &#125;<br>    &#125;<br>    flat(<span class="hljs-string">&#x27;&#x27;</span>, routes)<br>    <span class="hljs-keyword">return</span> n<br>&#125;<br>VueRouter.install = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_Vue</span>) </span>&#123;<br><br>    Vue = _Vue<br><br>    Vue.mixin(&#123;<br>        <span class="hljs-function"><span class="hljs-title">beforeCreate</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.$options.router) &#123;<br>                Vue.prototype.$routes = <span class="hljs-built_in">this</span>.$options.router<br>            &#125;<br>        &#125;,<br>    &#125;)<br>    Vue.component(<span class="hljs-string">&#x27;router-view&#x27;</span>, &#123;<br>        <span class="hljs-attr">computed</span>: &#123;<br>            <span class="hljs-function"><span class="hljs-title">current</span>(<span class="hljs-params"></span>)</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.$routes.current<br>            &#125;<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params">h</span>)</span> &#123;<br>            <span class="hljs-keyword">let</span> nroutes = flatCurrty(<span class="hljs-built_in">this</span>.$routes.options.routes)<br>            <span class="hljs-keyword">let</span> currou = nroutes.find(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> i.path === <span class="hljs-built_in">this</span>.current)<br>            <span class="hljs-keyword">if</span> (currou.component) &#123;<br>                <span class="hljs-keyword">return</span> h(currou.component)<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> h(<span class="hljs-literal">null</span>)<br>            &#125;<br><br>        &#125;,<br>    &#125;)<br><br>    Vue.component(<span class="hljs-string">&#x27;router-link&#x27;</span>, &#123;<br>        <span class="hljs-attr">props</span>: &#123;<br>            <span class="hljs-attr">to</span>: &#123;<br>                <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>,<br>                <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&#123;</span>&#x27;#&#x27; + <span class="hljs-attr">this.to</span>&#125;&gt;</span>&#123;this.$slots.default[0]&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br>        &#125;,<br>    &#125;)<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> VueRouter<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight html"><figcaption><span>vue视图层</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>首页<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about&quot;</span>&gt;</span>关于页面<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about/child3&quot;</span>&gt;</span>儿子一<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about/child2/sunzi1&quot;</span>&gt;</span>孙子一<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about/child2&quot;</span>&gt;</span>儿子二<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about/child2/sunzi2&quot;</span>&gt;</span>孙子二<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><figcaption><span>路由文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../soundCode/sparrow-router&#x27;</span>;<br><span class="hljs-keyword">import</span> HelloWorld <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../components/HelloWorld.vue&#x27;</span><br><span class="hljs-keyword">import</span> About <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../components/About.vue&#x27;</span><br><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br>Vue.use(Router)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;hash&#x27;</span>,<br>    <span class="hljs-attr">routes</span>: [<br>        &#123;<br>            <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>,<br>            <span class="hljs-attr">component</span>: About,<br>            <span class="hljs-attr">children</span>: [<br>                &#123;<br>                    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/child2&#x27;</span>,<br>                    <span class="hljs-attr">component</span>: &#123; <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x27;About2&#x27;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> &#125; &#125;,<br>                    <span class="hljs-attr">children</span>: [&#123;<br>                        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sunzi1&#x27;</span>,<br>                        <span class="hljs-attr">component</span>: &#123; <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x27;sunzi1&#x27;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> &#125; &#125;,<br>                    &#125;, &#123;<br>                        <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/sunzi2&#x27;</span>,<br>                        <span class="hljs-attr">component</span>: &#123; <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x27;sunzi2&#x27;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> &#125; &#125;,<br>                    &#125;]<br>                &#125;,<br>                &#123;<br>                    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/child3&#x27;</span>,<br>                    <span class="hljs-attr">component</span>: &#123; <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x27;About3&#x27;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> &#125; &#125;<br>                &#125;,<br>                &#123;<br>                    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/child4&#x27;</span>,<br>                    <span class="hljs-attr">component</span>: &#123; <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x27;About4&#x27;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> &#125; &#125;<br>                &#125;,<br>            ]<br>        &#125;,<br>        &#123;<br>            <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>            <span class="hljs-attr">component</span>: HelloWorld<br>        &#125;,<br>    ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/" title="vue2-router 手动实现" target="_blank" rel="external">http://example.com/2021/08/27/vue2 router原理手撸/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lianglei-git" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lianglei-git" target="_blank"><span class="text-dark">麻雀</span><small class="ml-1x">法律、程序员、骑行玩家</small></a></h3>
+        <div>一个普普通通的人，在做着一辈子里面普普通通的事情，然后普普通通向前走！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/09/06/vue2%20vuex%E5%8E%9F%E7%90%86/" title="vue2-vuex 手动实现"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/08/16/%20%E8%AE%A4%E7%9F%A5%E5%B1%8A%E7%9A%84%E5%85%B3%E7%B3%BB%E6%88%B7%EF%BC%9FDIP%E3%80%81IoC%E3%80%81DI%E3%80%81JS/" title="认知届的关系户？DIP、IoC、DI、JS"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/zhifubao.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/weixin.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/lianglei-git" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2021 麻雀
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'N2DB2iN7RvtCW7tKM8twNYAo-gzGzoHsz',
+    appKey: 'OuyKq5bfQTIrbEflfhtToQXM',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>你可能还不知道的复制(Copy) | Sparrow</title>
+  <meta name="description" content="你可能还不知道的复制(Copy) – Js!!! PC &amp; 客户端  PS：你有没有被复制、粘贴图片或文字而感到烦恼， sparrow 来解决你终身疾病，赶快报名吧， 人员有限 饥渴难耐啊 Bro！  其实今天的主题就是要围绕着js里面的“复制”这一专业名词来概述全文。 「引言」PM: 我们这期来阐述一下1.6客户端需求， 巴拉巴拉... 在输入框里面粘贴图片、文字、文件功能，下期我们还会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你可能还不知道的复制(Copy)">
+<meta property="og:url" content="http://example.com/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Sparrow">
+<meta property="og:description" content="你可能还不知道的复制(Copy) – Js!!! PC &amp; 客户端  PS：你有没有被复制、粘贴图片或文字而感到烦恼， sparrow 来解决你终身疾病，赶快报名吧， 人员有限 饥渴难耐啊 Bro！  其实今天的主题就是要围绕着js里面的“复制”这一专业名词来概述全文。 「引言」PM: 我们这期来阐述一下1.6客户端需求， 巴拉巴拉... 在输入框里面粘贴图片、文字、文件功能，下期我们还会">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/09/public/images/1.png">
+<meta property="article:published_time" content="2021-09-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-27T10:04:35.004Z">
+<meta property="article:author" content="麻雀">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/09/public/images/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Sparrow" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="../images/logo.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/lianglei-git" target="_blank">
+          <img class="img-circle img-rotate" src="/images/logo.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">麻雀</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">法律、程序员、骑行玩家</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国-北京</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/lianglei-git" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>一个自卑的人，很现实。不清醒</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JS/" style="font-size: 14px;">JS</a> <a href="/tags/Node/" style="font-size: 13.5px;">Node</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Vue/" style="font-size: 13.5px;">Vue</a> <a href="/tags/%E8%B0%83%E8%AF%95/" style="font-size: 13px;">调试</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/" class="title">你可能还不知道的复制(Copy)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-26T16:00:00.000Z" itemprop="datePublished">2021-09-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/07/%E6%89%80%E8%B0%93%E6%A1%86%E6%9E%B6%E7%9A%84%E8%B0%83%E8%AF%95/" class="title">所谓框架的调试</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-06T16:00:00.000Z" itemprop="datePublished">2021-09-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/06/vue2%20vuex%E5%8E%9F%E7%90%86/" class="title">vue2-vuex 手动实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-05T16:00:00.000Z" itemprop="datePublished">2021-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/27/vue2%20router%E5%8E%9F%E7%90%86%E6%89%8B%E6%92%B8/" class="title">vue2-router 手动实现</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-26T16:00:00.000Z" itemprop="datePublished">2021-08-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/08/16/%20%E8%AE%A4%E7%9F%A5%E5%B1%8A%E7%9A%84%E5%85%B3%E7%B3%BB%E6%88%B7%EF%BC%9FDIP%E3%80%81IoC%E3%80%81DI%E3%80%81JS/" class="title">认知届的关系户？DIP、IoC、DI、JS</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-08-16T02:51:06.000Z" itemprop="datePublished">2021-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-you don&#39;t know &#39;Copy&#39; ？" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      你可能还不知道的复制(Copy)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/" class="article-date">
+	  <time datetime="2021-09-26T16:00:00.000Z" itemprop="datePublished">2021-09-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/JS/" rel="tag">JS</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="你可能还不知道的复制-Copy-–-Js"><a href="#你可能还不知道的复制-Copy-–-Js" class="headerlink" title="你可能还不知道的复制(Copy) – Js"></a>你可能还不知道的复制(Copy) – Js</h2><p><font color=red><strong>!!! PC &amp; 客户端</strong><font color=#000></p>
+<blockquote>
+<p>PS：你有没有被复制、粘贴图片或文字而感到烦恼， sparrow 来解决你终身疾病，赶快报名吧， 人员有限 饥渴难耐啊 Bro！</p>
+</blockquote>
+<p>其实今天的主题就是要围绕着js里面的“复制”这一专业名词来概述全文。</p>
+<p><code>「引言」PM: 我们这期来阐述一下1.6客户端需求， 巴拉巴拉... 在输入框里面粘贴图片、文字、文件功能，下期我们还会增加“复制”图片、文字功能， 再送给你一个拖拽文件图片文字到输入框功能... 我懵 PM: 哦 对了 还要兼容微信等其他粘贴图片的情况.... mmpmmpmmp</code></p>
+<p>就是这个不到一炷香的时间，引发了思考， 咋做咋做咋做？？粘贴倒是还有点眉目，<code>paste</code>事件嘛 再根据里面的类型做处理就好了， 拖拽也还行<code>drag</code>而已了 我在送给你一个进来时候背景变色， 但是 复制怎么做？ 文字好像用上古年代的<code>execCommand</code>应该就是没多大问题吧，但是鬼图片 还要兼容微信的粘贴功能 甚至还有wps 浏览器各种情况下的兼容， 这咋搞 ？？ 听我潺潺道来 （三天两夜几百根头发换来的）</p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li>粘贴图片格式、规则 <ul>
+<li>微信聊天图片粘贴(Rule)</li>
+<li>微信截图粘贴(Rule)</li>
+</ul>
+</li>
+<li>拖拽</li>
+<li>复制<ul>
+<li>复制文字</li>
+<li>复制图片<h3 id="粘贴图片格式、规则"><a href="#粘贴图片格式、规则" class="headerlink" title="粘贴图片格式、规则"></a>粘贴图片格式、规则</h3>粘贴图片所监听的<code>event</code>里会有不同的类型格式，在某个软件里粘贴出来，可能要遵循人家内部<strong>复制</strong>图片所谓的规则，目前我遇见的只有微信这个 78（路人的眼光）。<h4 id="微信聊天图片粘贴-Rule"><a href="#微信聊天图片粘贴-Rule" class="headerlink" title="微信聊天图片粘贴(Rule)"></a>微信聊天图片粘贴(Rule)</h4>这就是微信聊天页面里面的图片粘贴， （随便在微信找个带有图片的聊天窗口，然后右键复制）然后… 撸代码啊</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// 这里我主要是应用富文本来实现的输入框正常操作</span><br>    &lt;div<br>        <span class="hljs-class"><span class="hljs-keyword">class</span></span>=&#123;[<span class="hljs-string">&quot;el-textarea&quot;</span>, <span class="hljs-built_in">this</span>.changeInputBackground ? <span class="hljs-string">&#x27;background&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>]&#125;<br>        ref=&#123;<span class="hljs-string">&#x27;messageContent&#x27;</span>&#125;<br>        spellcheck=<span class="hljs-string">&quot;false&quot;</span><br>        vScrollbar<br>        contentEditable=<span class="hljs-string">&quot;true&quot;</span><br>        onInput=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.messageInput(e)&#125;<br>        on-keydown=&#123;<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> <span class="hljs-built_in">this</span>.keydown(e)&#125;<br>        placeholder=<span class="hljs-string">&quot;&quot;</span><br>        on-focus=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.keepLastIndex(e.target)&#125;<br>        on-drop=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.drop(e)&#125;<br>        on-paste=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.paste(e)&#125;<br>        on-blur=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.textareaBlur(e)&#125;<br>        on-dragenter=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.dragEnter(e)&#125;<br>        on-dragleave=&#123;<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.dragLeave(e)&#125;<br>        domPropsInnerHTML=&#123;<span class="hljs-built_in">this</span>.vmodelMessage&#125;<br>    &gt;&lt;/div&gt;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 粘贴事件</span><br><span class="hljs-comment"> */</span><br>    <span class="hljs-function"><span class="hljs-title">paste</span>(<span class="hljs-params">event</span>)</span> &#123;<br>        event.preventDefault()<br>        <span class="hljs-keyword">let</span> * = <span class="hljs-built_in">this</span>.$refs.messageContent <span class="hljs-comment">// 输入框内容 * 随便写的 </span><br>        <span class="hljs-keyword">var</span> clipboardData = event.clipboardData || <span class="hljs-built_in">window</span>.clipboardData<br>        <span class="hljs-keyword">const</span> items = clipboardData.items<br>        <span class="hljs-keyword">const</span> text = clipboardData.getData(<span class="hljs-string">&#x27;text/plain&#x27;</span>) <span class="hljs-comment">// 获取文本</span><br>        <span class="hljs-keyword">let</span> apptext = <span class="hljs-built_in">document</span>.createTextNode(text)<br>        <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, tl = items.length;<br>        <span class="hljs-keyword">let</span> imagesblob = [] <span class="hljs-comment">// 这里写了几种类型 bolb加密、 base64 、 formdata 这个可以上传时候和服务端做协商</span><br>        <span class="hljs-keyword">let</span> imagesbase64 = [] <br>        <span class="hljs-comment">// var fd = new FormData(document.forms[0]);</span><br><br>        <span class="hljs-keyword">for</span> (; i &lt; tl;) &#123;<br>            <span class="hljs-keyword">if</span> (items[i].kind == <span class="hljs-string">&#x27;file&#x27;</span>) &#123;<br>                <span class="hljs-keyword">let</span> file = items[i].getAsFile();<br>                <span class="hljs-keyword">if</span> (file.type.indexOf(<span class="hljs-string">&#x27;image&#x27;</span>) &gt; -<span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-keyword">let</span> blob = URL.createObjectURL(file) <span class="hljs-comment">// 创建bolb</span><br>                    <span class="hljs-keyword">let</span> el = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;img&#x27;</span>)<br>                    el.title = file.name<br>                    el.src = blob<br>                    el.dataset.name = file.name<br>                    <span class="hljs-keyword">if</span> (file.path.length == <span class="hljs-number">0</span> &amp;&amp; tl == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 剪切板情况</span><br>                        <span class="hljs-keyword">var</span> reader = <span class="hljs-keyword">new</span> FileReader();<br>                        reader.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;<br>                            el.dataset.path = event.target.result<br>                            el.dataset.type = <span class="hljs-string">&#x27;2&#x27;</span> <span class="hljs-comment">// 2是没有path时候发送</span><br>                        &#125;<br>                        reader.readAsDataURL(file);<br>                        imagesblob.push(el)<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-keyword">if</span> (file.path.length !== <span class="hljs-number">0</span>) &#123;<br>                            el.dataset.path = file.path<br>                            el.dataset.type = <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-comment">// 1是正常发送  </span><br>                            imagesblob.push(el)<br>                        &#125;<br>                    &#125;<br>                    <span class="hljs-comment">// var reader = new FileReader();</span><br>                    <span class="hljs-comment">// reader.onload = function (event) &#123;</span><br>                    <span class="hljs-comment">//     var base64_str = event.target.result;</span><br>                    <span class="hljs-comment">//     imagesbase64.push(base64_str);</span><br>                    <span class="hljs-comment">// &#125;</span><br>                    <span class="hljs-comment">// reader.readAsDataURL(file);</span><br>                    <span class="hljs-comment">// fd.append(&#x27;file&#x27; + i, file)</span><br>                &#125;<br>            &#125;<br>            i++<br>        &#125;<br>        *.append(apptext) <span class="hljs-comment">// 添加文本</span><br>        <span class="hljs-keyword">if</span> (imagesblob.length &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; imagesblob.length; j++) &#123;<br>                *.append(imagesblob[j]) <span class="hljs-comment">// 添加图片</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-built_in">this</span>.keepLastIndex(*) <span class="hljs-comment">// 光标滞后</span><br>    &#125;,<br><br></code></pre></td></tr></table></figure>
+<p>其实这个还好 但是你永远不知道会有什么魔鬼出现 比如微信输入框里面复制的时候会出现两个图片, 然后第一张图解析出来之后没有path， 第二张会有path， 这样一来你肯定会判断没有path那张图片，然后进行处理<br><img src="../../public/images/1.png"></p>
+<h4 id="微信截图粘贴-Rule"><a href="#微信截图粘贴-Rule" class="headerlink" title="微信截图粘贴(Rule)"></a>微信截图粘贴(Rule)</h4><p>还有一种情况， 是屏幕截图的时候， 你会发现这个图片使用二进制存在这个剪切板里面的 没有路径储存， 他就是一串乱码，然后 会发现有冲突， 跟刚才的情况有很大的冲突… 上边代码解决了都 我也忘记咋写的了（好几个月前写的了）</p>
+<h4 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h4><p>献上一份垃圾代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-function"><span class="hljs-title">drop</span>(<span class="hljs-params">event</span>)</span> &#123;<br>    event.preventDefault()<br>    <span class="hljs-keyword">let</span> imgTypeFn = <span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> file.type.indexOf(<span class="hljs-string">&#x27;image&#x27;</span>) &gt; -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">let</span> items = event.dataTransfer.files <span class="hljs-comment">// 获取拖拽的所有文件</span><br>    <span class="hljs-comment">// event.dataTransfer.getData(&#x27;text/plain&#x27;)  //获取拖拽进来的文字</span><br>    <span class="hljs-keyword">let</span> * = <span class="hljs-built_in">this</span>.$refs.messageContent<br>    <span class="hljs-keyword">const</span> text = event.dataTransfer.getData(<span class="hljs-string">&#x27;text/plain&#x27;</span>)<br>    <span class="hljs-keyword">let</span> apptext = <span class="hljs-built_in">document</span>.createTextNode(text)<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, tl = items.length;<br>    <span class="hljs-keyword">let</span> imagesblob = []<br>    <span class="hljs-keyword">for</span> (; i &lt; tl;) &#123;<br>        <span class="hljs-keyword">if</span> (imgTypeFn(items[i])) &#123;<br>            <span class="hljs-keyword">let</span> blob = URL.createObjectURL(items[i])<br>            <span class="hljs-keyword">let</span> el = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;img&#x27;</span>)<br>            el.title = items[i].name<br>            el.src = blob<br>            el.dataset.name = items[i].name<br>            el.dataset.path = items[i].path<br>            imagesblob.push(el)<br>        &#125; <br>        i++<br>    &#125;<br>    *.append(apptext)<br>    <span class="hljs-keyword">if</span> (imagesblob.length &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; imagesblob.length; j++) &#123;<br>            *.append(imagesblob[j])<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">this</span>.keepLastIndex(*)<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>好了 主角上场了</p>
+<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p>其实在此之前，还是查了一下网上的各种资料， 也有很多很好的工具库实现了这个功能;比如 <a href="clipboardjs.com/">clipboard.js</a>; 还有原生方法 <code>document.execCommand(&#39;copy&#39;)</code> 、<code>event.clipboardData (copy) (paste)</code> 、<code>Navigator.clipboard</code>  前面那两个我们应该不是很陌生，今天主要说后面那个新增的。PS：其实我很想更细化些搞出点东西，但是时间节点不允许我这样做，so… 搓搓手凑活看吧<br>额… 我这里直接说今天的重点吧 <code>Navigator.clipboard</code> <strong>剪贴板</strong>  这是新版本的剪切、复制、粘贴<br><strong>剪贴板API</strong><br>浏览器允许 JavaScript 脚本读写剪贴板，自动复制或粘贴内容。<br>一般来说，脚本不应该改动用户的剪贴板，以免不符合用户的预期。但是，有些时候这样做确实能够带来方便，比如”一键复制”功能，用户点击一下按钮，指定的内容就自动进入剪贴板。</p>
+<h4 id="Document-execCommand-方法-阮一峰老师的日志"><a href="#Document-execCommand-方法-阮一峰老师的日志" class="headerlink" title="Document.execCommand() 方法  (阮一峰老师的日志)"></a>Document.execCommand() 方法  (<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2021/01/clipboard-api.html">阮一峰老师的日志</a>)</h4><pre><code> Document.execCommand()是操作剪贴板的传统方法，
+ 各种浏览器都支持。
+ 它支持复制、剪切和粘贴这三个操作。
+</code></pre>
+<ul>
+<li><p>document.execCommand(‘copy’)（复制）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 这种选择方式就要创建input去赋值内容然后select 然后复制</span><br><span class="hljs-keyword">const</span> inputElement = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#input&#x27;</span>);<br>inputElement.select();<br><span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&#x27;copy&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+<li><p>document.execCommand(‘cut’)（剪切）</p>
+</li>
+<li><p>document.execCommand(‘paste’)（粘贴）</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 同样原理</span><br><span class="hljs-keyword">const</span> pasteText = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#output&#x27;</span>);<br>pasteText.focus();<br><span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&#x27;paste&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+<li><p>缺点<br>  Document.execCommand()方法虽然方便，但是有一些缺点。<br>  首先，它只能将选中的内容复制到剪贴板，无法向剪贴板任意写入内容。<br>  其次，它是同步操作，如果复制/粘贴大量数据，页面会出现卡顿。有些浏览器还会跳出提示框，要求用户许可，这时在用户做出选择前，页面会失去响应。</p>
+</li>
+</ul>
+<p>为了解决这些问题，浏览器厂商提出了异步的 Clipboard API。</p>
+<h4 id="Clipboard-API"><a href="#Clipboard-API" class="headerlink" title="Clipboard API"></a>Clipboard API</h4><pre><code>Clipboard API 是下一代的剪贴板操作方法，比传统的document.execCommand()方法更强大、更合理;
+它的所有操作都是异步的，返回 Promise 对象，不会造成页面卡顿。而且，它可以将任意内容（比如图片）放入剪贴板;
+navigator.clipboard属性返回 Clipboard 对象，所有操作都通过这个对象进行;
+</code></pre>
+<p><code>const clipboardObj = navigator.clipboard;</code><br>如果navigator.clipboard属性返回undefined，就说明当前浏览器不支持这个 API。<br>Clipboard 对象提供的方法:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard/read">read()</a><br>从剪贴板读取数据（比如图片），返回一个 Promise 对象。When the data has been retrieved, the promise is resolved with a DataTransfer object that provides the data。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getClipboardContents</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">const</span> clipboardItems = <span class="hljs-keyword">await</span> navigator.clipboard.read();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> clipboardItem <span class="hljs-keyword">of</span> clipboardItems) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> type <span class="hljs-keyword">of</span> clipboardItem.types) &#123;<br>                <span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">await</span> clipboardItem.getType(type);<br>                <span class="hljs-built_in">console</span>.log(URL.createObjectURL(blob));<br>            &#125;<br>        &#125;<br>    &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>        <span class="hljs-built_in">console</span>.error(err.name, err.message);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard/readText">readText()</a><br>从操作系统读取文本；returns a Promise which is resolved with a DOMString containing the clipboard’s text once it’s available。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.body.addEventListener(<br><span class="hljs-string">&#x27;click&#x27;</span>,<br>    <span class="hljs-keyword">async</span> (e) =&gt; &#123;<br>        <span class="hljs-keyword">const</span> text = <span class="hljs-keyword">await</span> navigator.clipboard.readText();<br>        <span class="hljs-built_in">console</span>.log(text);<br>    &#125;<br>)<br></code></pre></td></tr></table></figure></li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard/write">write()</a><br>写入任意数据至操作系统剪贴板。This asynchronous operation signals that it’s finished by resolving the returned Promise。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> imgURL = <span class="hljs-string">&#x27;https://dummyimage.com/300.png&#x27;</span>;<br>    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> fetch(imgURL);<br>    <span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">await</span> data.blob();<br>    <span class="hljs-keyword">await</span> navigator.clipboard.write([<br>        <span class="hljs-keyword">new</span> ClipboardItem(&#123;<br>        [blob.type]: blob<br>        &#125;)<br>    ]);<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Image copied.&#x27;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>    <span class="hljs-built_in">console</span>.error(err.name, err.message);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard/writeText">writeText()</a><br>写入文本至操作系统剪贴板。returning a Promise which is resolved once the text is fully copied into the clipboard。 </p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">document</span>.body.addEventListener(<br><span class="hljs-string">&#x27;click&#x27;</span>,<br>    <span class="hljs-keyword">async</span> (e) =&gt; &#123;<br>        <span class="hljs-keyword">await</span> navigator.clipboard.writeText(<span class="hljs-string">&#x27;Yo&#x27;</span>)<br>    &#125;<br>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>!!! 上面在使用write写入图片的时候， 可能会出现点小问题， 比如blob格式不符合然后就很难达到我们的预期， 就很烦是吧<br>    比如:<code>Cannot read properties of undefined (reading &#39;substring&#39;)</code> 、 <code>Failed to read or decode Blob for clipboard item type image/png.</code> 这种错误的来源就是图片格式不正确或者是 在解析的为blob格式时候出现了问题。 额.. 那就手动解析一下吧<br>    先把图片解析成base64在解析成blob在传入ClipboardItem在传入write复制。 嗯 就这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//先解析成base64</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">imageBase64</span>(<span class="hljs-params">img</span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> canvas = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;canvas&quot;</span>);<br>    canvas.width = img.width;<br>    canvas.height = img.height;<br>    <span class="hljs-keyword">var</span> ctx = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>);<br>    ctx.drawImage(img, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, img.width, img.height);<br>    <span class="hljs-keyword">var</span> dataURL = canvas.toDataURL(<span class="hljs-string">&quot;image/png&quot;</span>);<br>    <span class="hljs-keyword">return</span> dataURL;<br>&#125;<br><span class="hljs-comment">// 再转成blod // 注意base64里面的特殊符号 在atob的时候不能识别“,”</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">base64ToBlob</span>(<span class="hljs-params">b64Data, contentType, sliceSize</span>) </span>&#123;<br>    contentType = contentType || <span class="hljs-string">&#x27;&#x27;</span>;<br>    sliceSize = sliceSize || <span class="hljs-number">512</span>;<br>    <span class="hljs-keyword">var</span> byteCharacters = <span class="hljs-built_in">window</span>.atob(b64Data);<br>    <span class="hljs-comment">// var byteCharacters  = b64Data;</span><br>    <span class="hljs-comment">//该atob函数将base64编码的字符串解码为一个新字符串，其中包含二进制数据每个字节的字符。</span><br>    <span class="hljs-keyword">var</span> byteArrays = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> offset = <span class="hljs-number">0</span>; offset &lt; byteCharacters.length; offset += sliceSize) &#123;<br>        <span class="hljs-keyword">var</span> slice = byteCharacters.slice(offset, offset + sliceSize);<br>        <span class="hljs-keyword">var</span> byteNumbers = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(slice.length);<br>        <span class="hljs-comment">//通过使用.charCodeAt字符串中每个字符的方法应用它来创建一个字节值数组。</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; slice.length; i++) &#123;<br>            byteNumbers[i] = slice.charCodeAt(i);<br>        &#125;<br>        <span class="hljs-comment">//将此字节值数组转换为实际类型的字节数组，方法是将其传递给Uint8Array构造函数。</span><br>        <span class="hljs-keyword">var</span> byteArray = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(byteNumbers);<br>        byteArrays.push(byteArray);<br>    &#125;<br>    <span class="hljs-built_in">console</span>.log(byteArrays)<br>    <span class="hljs-comment">//创建一个blob：包含此数据的URL，并将其显示给用户。</span><br>    <span class="hljs-keyword">var</span> blob = <span class="hljs-keyword">new</span> Blob(byteArrays, &#123; <span class="hljs-attr">type</span>: contentType &#125;);<br>    <span class="hljs-keyword">return</span> blob;<br>&#125;<br><br><span class="hljs-comment">// 最后复制</span><br>copy_img.onclick = <span class="hljs-keyword">async</span> _ =&gt; &#123;<br>    <span class="hljs-keyword">let</span> base64 = imageBase64(img)<br>    <span class="hljs-keyword">let</span> blob = base64ToBlob(base64.replace(<span class="hljs-string">&#x27;data:image/png;base64,&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>), <span class="hljs-string">&#x27;image/png&#x27;</span>) <br>    clipboardObj.write([<br>        <span class="hljs-keyword">new</span> ClipboardItem(&#123;<br>            <span class="hljs-string">&#x27;image/png&#x27;</span>: blob<br>        &#125;)<br>    ])<br>&#125;<br><span class="hljs-comment">// Nice</span><br>   <br></code></pre></td></tr></table></figure>
+<h4 id="Event-clipboardData"><a href="#Event-clipboardData" class="headerlink" title="Event.clipboardData"></a>Event.clipboardData</h4><ul>
+<li>Event.clipboardData.setData(type, data)：修改剪贴板数据，需要指定数据类型。</li>
+<li>Event.clipboardData.getData(type)：获取剪贴板数据，需要指定数据类型。</li>
+<li>Event.clipboardData.clearData([type])：清除剪贴板数据，可以指定数据类型。如果不指定类型，将清除所有类型的数据。</li>
+<li>Event.clipboardData.items：一个类似数组的对象，包含了所有剪贴项，不过通常只有一个剪贴项。</li>
+</ul>
+<hr>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2021/01/clipboard-api.html">阮一峰老师的 “剪贴板操作 Clipboard API 教程”</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransferItem">DataTransferItem</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/File">new File(…)</a></li>
+<li><a href="clipboardjs.com/">clipboard.js</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/clipboard-polyfill">clipboard-polyfill</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">Blob 相关简介</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/clipboard">Navigator.clipboard 官方介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.tomayac.com/2020/03/20/multi-mime-type-copying-with-the-async-clipboard-api/">MIME-copy</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/ClipboardItem">一定要看看 ClipboardItem </a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/leong-min/p/6483523.html">Javascript中document.execCommand()的用法</a></li>
+<li><a target="_blank" rel="noopener" href="https://async-clipboard-api.glitch.me/">复制图片的Demo – Async Clipboard API Image Demo</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/09/27/you%20don't%20know%20'Copy'%20%EF%BC%9F/" title="你可能还不知道的复制(Copy)" target="_blank" rel="external">http://example.com/2021/09/27/you don't know 'Copy' ？/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lianglei-git" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/logo.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lianglei-git" target="_blank"><span class="text-dark">麻雀</span><small class="ml-1x">法律、程序员、骑行玩家</small></a></h3>
+        <div>一个普普通通的人，在做着一辈子里面普普通通的事情，然后普普通通向前走！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/09/07/%E6%89%80%E8%B0%93%E6%A1%86%E6%9E%B6%E7%9A%84%E8%B0%83%E8%AF%95/" title="所谓框架的调试"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/zhifubao.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/weixin.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/lianglei-git" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2021 麻雀
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'N2DB2iN7RvtCW7tKM8twNYAo-gzGzoHsz',
+    appKey: 'OuyKq5bfQTIrbEflfhtToQXM',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
