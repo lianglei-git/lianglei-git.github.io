@@ -5635,6 +5635,9 @@ pre code {
   line-height: 24px;
 }
 
+.gutter {
+  display: none;
+}
 .highlight .gutter pre {
   text-align: right;
   padding-right: 0;
